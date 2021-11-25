@@ -57,7 +57,7 @@ class Gram_Schmidt():
         R = np.array(R).T
 
         np.set_printoptions(suppress=True)
-        print("****manipulation****")
+        print("****manipulation Shmidt_factor****")
         print("A","Q","R");print(A,"\n",Q,"\n",R)
         print("QR","Q.T Q");print(np.dot(Q,R));print(np.dot(Q,Q.T))
         
