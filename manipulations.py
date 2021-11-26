@@ -1,26 +1,46 @@
 import numpy as np
 import argparse
-import Gram_Schmidt
 from Gram_Schmidt import Gram_Schmidt
-import Givens
 from Givens import Givens
-import householder
-from householder import householder
-import PLU
+from householder import housholder
 from PLU import PLU 
-import URV
 from URV import URV
-import argparse
 
 if __name__ == "__main__":
-    # 测试A矩阵，如果想要换别的矩阵的话，可以在这里修改
-    A = np.array([
-        [1,2,-3,4],
-        [4,8,12,-8],
-        [2,3,2,1],
-        [-3,-1,1,-4]])
     
-    QR = Gram_Schmidt(A)
-    Q,R = QR.Shmidt_factor(A)
-    QR.lin_equ(A,Q,R,b1=np.array([4,16,8,-7]))
-    QR.det_calc(A,Q,R)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--manipulation','-man',default="Householder",help="choose the manipulation,PLU,Gram-Schmidt,Householder,Givens,URV ")
+    parser.add_argument('--A', action='store', type=float, nargs='+',help="the original matrix")
+    parser.add_argument('--nrowsA', action='store', type=int,help="the number of rows of original matrix")
+    parser.add_argument('--b',action='store', type=float, nargs='+',help="the original equation b (the form Ax=b)")
+    parser.add_argument('--nrowsb', action='store', type=int,help="the number of rows of equation b (the form Ax=b)")
+    
+    orders = parser.parse_args()
+
+    A = np.array(orders.A).reshape((orders.nrowsA, len(orders.A)//orders.nrowsA))
+    b = np.array(orders.b) #.reshape((orders.nrowsb, len(orders.b)//orders.nrowsb))
+    if str(orders.manipulation)=="Householder":
+        HS = housholder(A)
+        R,Q = HS.household_red(A)
+        HS.lin_equ(A,R,Q,b1=b)
+        HS.det_calc(A,R,Q)
+    
+    elif str(orders.manipulation)=="Gram-Schmidt":
+        QR = Gram_Schmidt(A)
+        Q,R = QR.Shmidt_factor(A)
+        QR.lin_equ(A,Q,R,b1=b)
+        QR.det_calc(A,Q,R)
+
+    elif str(orders.manipulation)=="PLU":
+        plu = PLU(A,b)
+    elif str(orders.manipulation)=="Givens":
+        GI = Givens(A)
+        R,Q = GI.givens_reduction(A)
+        GI.lin_equ(A,R,Q,b1=b)
+        GI.det_calc(A,R,Q)
+    elif str(orders.manipulation)=="URV":
+        urv = URV(A,b)
+        U,C = urv.URV_factor(A)
+    else:
+        print("The manipulation should be one of the follows: PLU,Gram-Schmidt,Householder,Givens,URV")
+

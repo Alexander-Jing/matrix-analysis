@@ -10,7 +10,7 @@ class PLU():
         L,U,P = self.PLU_trans()
         # 求解方程组
         self.sol_calc(L,U,P,b)
-        self.det_calc(L,U,P)
+        self.det_calc(A,L,U,P)
 
 
     def P_i(self,A,ind):
@@ -64,7 +64,7 @@ class PLU():
         U = A
         Pi = Pi[::-1]  # Pi需要倒序下，方便乘积
         P = np.linalg.multi_dot(Pi)
-        print("****manipulation****")
+        print("****manipulation PLU****")
         print("U","L","P");print(U,"\n",L,"\n",P)
         print("LU","PA");print(np.dot(L,U),"\n",np.dot(P,self.A))
         return L,U,P
@@ -105,9 +105,10 @@ class PLU():
         print("Ax")
         print(np.dot(A,xi))
     
-    def det_calc(self,L,U,P):
+    def det_calc(self,A,L,U,P):
         """计算行列式
         参数:
+            A：原来的矩阵
             L,U,P(array): 分解出来的PLU三个矩阵
         
         会显示求解的行列式值，同时会显示用来验证的使用numpy计算的行列式

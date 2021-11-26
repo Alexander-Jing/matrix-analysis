@@ -123,6 +123,7 @@ if __name__ == "__main__":
         [4,8,12,-8],
         [2,3,2,1],
         [-3,-1,1,-4]])
+    b1=np.array([4,16,8,-7])
     GI = Givens(A)
     R,Q = GI.givens_reduction(A)
     GI.lin_equ(A,R,Q,b1=np.array([4,16,8,-7]))

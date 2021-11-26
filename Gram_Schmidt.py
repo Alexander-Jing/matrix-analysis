@@ -111,8 +111,8 @@ class Gram_Schmidt():
         detR = 1
         for i in range(n):
             detR = detR*R[i,i]
-        detA = detR*1
-        print("det(A)")
+        detA = np.abs(detR*1)
+        print("det(A) absolute value")
         print(detA)
         print("validate the det(A)")
         print(np.linalg.det(A))
