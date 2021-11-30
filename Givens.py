@@ -113,7 +113,7 @@ class Givens():
         print("validate the det(A)")
         print(np.linalg.det(A))
         
-        return A
+        return detA
 
 
 if __name__ == "__main__":

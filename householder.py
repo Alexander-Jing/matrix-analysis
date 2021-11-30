@@ -113,10 +113,10 @@ class housholder():
         print("validate the det(A)")
         print(np.linalg.det(A))
         
-        return A
+        return detA
 
 
-"""if __name__ == "__main__":
+if __name__ == "__main__":
     # 测试A矩阵，如果想要换别的矩阵的话，可以在这里修改
     A = np.array([
         [1,2,-3,4],
@@ -126,4 +126,4 @@ class housholder():
     HS = housholder(A)
     R,Q = HS.household_red(A)
     HS.lin_equ(A,R,Q,b1=np.array([4,16,8,-7]))
-    HS.det_calc(A,R,Q)"""
+    HS.det_calc(A,R,Q)

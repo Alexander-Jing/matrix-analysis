@@ -134,6 +134,7 @@ class PLU():
         print(detA)
         print("validate the det(A)")
         print(np.linalg.det(A))
+        return detA
 
 
         

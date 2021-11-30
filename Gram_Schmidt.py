@@ -117,7 +117,7 @@ class Gram_Schmidt():
         print("validate the det(A)")
         print(np.linalg.det(A))
         
-        return A
+        return detA
 
 
 

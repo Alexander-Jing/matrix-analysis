@@ -40,7 +40,10 @@ if __name__ == "__main__":
         GI.det_calc(A,R,Q)
     elif str(orders.manipulation)=="URV":
         urv = URV(A,b)
-        U,C = urv.URV_factor(A)
+        urv.URV_factor(A)
+        U,V,C = urv.SVD_factor(A)
+        urv.lin_equ(A,U,C,V,b)
+        urv.det_calc(A,U,C,V) 
     else:
         print("The manipulation should be one of the follows: PLU,Gram-Schmidt,Householder,Givens,URV")
 
